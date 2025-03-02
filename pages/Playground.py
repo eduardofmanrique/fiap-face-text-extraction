@@ -2,11 +2,12 @@ from services.llm.gpt import GptTextInterpreter
 from services.face_match.aws_rekognition import AwsRekognitionFaceMatch
 from services.face_extract.aws_rekognition import AwsRekognitionFaceExtract
 from services.text_extract.aws_textract import AwsTextract
+from services.text_extract.easyocr_extract import EasyOCRTextExtract
 
 import streamlit as st
 from boto3 import client as aws_client
 from openai import OpenAI
-
+from easyocr import Reader
 
 st.write("# Playground")
 st.write('## Modelos')
@@ -16,7 +17,7 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     model_img_to_text = st.selectbox(
         "Imagem para texto",
-        ("AWS", "Azure (em breve)", "GCP (em breve)")
+        ("AWS", "EasyOCR", "Azure (em breve)", "GCP (em breve)")
     )
 with col2:
     model_llm = st.selectbox(
@@ -57,6 +58,15 @@ all_services = {
                         "region_name": "us-east-1"
                     }
                 },
+            "EasyOCR":
+                {
+                    "obj": EasyOCRTextExtract,
+                    "client_obj": Reader,
+                    "client_kwargs": {
+                        "lang_list": ["pt"]
+                    }
+
+                }
         },
     "model_llm":
         {
