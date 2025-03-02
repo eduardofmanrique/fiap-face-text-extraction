@@ -108,13 +108,13 @@ st.write('## Documentos')
 st.write("Envie os arquivos a seguir para verificarmos sua identidade")
 
 st.write("📄 **Envie seu documento (RG ou CNH)**")
-document_file_input = st.file_uploader("Envie um arquivo de um documento com CPF e foto:",type=["jpg", "jpeg", "png"])
+document_file_input = st.file_uploader("Envie um arquivo de um documento com CPF e foto:",type=["jpg", "jpeg", "png", "pdf"])
 
 st.write("🏠 **Envie uma foto de um comprovante de residência**")
 address_document_input = st.file_uploader("A conta deve conter seu nome e endereço", type=["jpg", "jpeg", "png", "pdf"])
 
-st.write("📸 **Tire uma foto sua!**")
-st.write("Tire uma foto sem outras pessoas ao seu lado")
+st.write("📸 **Envie uma foto sua!**")
+st.write("Envie uma foto sem outras pessoas ao seu lado")
 camera_enabled = st.session_state.get('camera_enabled', False)
 
 if st.button("Ligar/Desligar Câmera"):
@@ -124,6 +124,10 @@ if st.button("Ligar/Desligar Câmera"):
 user_photo_input = None
 if camera_enabled:
     user_photo_input = st.camera_input("Tire sua foto")
+
+if not camera_enabled:
+    user_photo_input = st.file_uploader("Mande uma foto sua!",
+                                        type=["jpg", "jpeg", "png", "pdf"])
 
 if st.button("Verificar identidade!"):
 
