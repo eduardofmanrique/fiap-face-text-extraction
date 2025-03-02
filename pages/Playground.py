@@ -148,7 +148,7 @@ if st.button("Verificar identidade!"):
                 address_document_user_data = model_img_to_text_service.extract_text(address_document)
                 st.toast("Documentos convertidos em texto!")
             except Exception as e:
-                st.error(f'Não foi possível transformar o modelo de Imagem para texto. Segue erro:')
+                st.error(f'Não foi possível transformar o modelo de Imagem para texto. Segue erro: {e}')
                 raise Exception(e)
 
 
@@ -233,7 +233,7 @@ if st.button("Verificar identidade!"):
                     raise Exception(f"Nomes não estão iguais nos documentos! Nome do documento = {name_and_cpf['nome']} e Nome do comprovante = {name_and_address['nome']}")
                 st.toast("Documentos com nomes corretos!")
             except Exception as e:
-                st.error(f'Não foi possível identificar os dados do usuário. Segue erro:')
+                st.error(f'Não foi possível identificar os dados do usuário. Segue erro: {e}')
                 raise Exception(e)
 
 
@@ -249,7 +249,7 @@ if st.button("Verificar identidade!"):
                 )
                 st.toast("Rosto encontrado!")
             except Exception as e:
-                st.error(f'Não foi possível extrair o rosto do usuário. Segue erro:')
+                st.error(f'Não foi possível extrair o rosto do usuário. Segue erro:{e}')
                 raise Exception(e)
 
 
@@ -268,8 +268,7 @@ if st.button("Verificar identidade!"):
                 )
                 st.toast("Identidades correspondem!")
             except Exception as e:
-                st.toast("Identidades não correspondem!")
-                st.error(f'O usuário da foto não é o mesmo do documento. Segue erro:')
+                st.error(f'O usuário da foto não é o mesmo do documento. Segue erro: {e}')
                 raise Exception(e)
 
 
